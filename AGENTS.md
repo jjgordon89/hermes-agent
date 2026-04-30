@@ -2,6 +2,15 @@
 
 Instructions for AI coding assistants and developers working on the hermes-agent codebase.
 
+## For AI assistants
+
+- Treat `AGENTS.md` as the primary customization/instruction file for this repo. Do not create a new `.github/copilot-instructions.md` unless the user explicitly asks for a separate GitHub Copilot prompt file.
+- Prefer concise fixes and targeted edits. Link to existing docs rather than copying large sections from `README.md`, `CONTRIBUTING.md`, or `website/docs`.
+- Use `scripts/run_tests.sh` for test validation. Do not call `pytest` directly unless the user explicitly asks for IDE-local testing and there is no alternative.
+- Preserve profile safety: use `get_hermes_home()` for state paths, `display_hermes_home()` for user-facing paths, and never hardcode `~/.hermes`.
+- Tool code belongs in `tools/*.py` with `registry.register()`. CLI commands are centrally defined in `hermes_cli/commands.py` and dispatched in `cli.py`.
+- For UI work, do not re-implement the main terminal chat flow in React. Extend `ui-tui`/Ink only when adding supplementary views or tooling.
+
 ## Development Environment
 
 ```bash
